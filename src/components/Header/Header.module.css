@@ -1,0 +1,12 @@
+.header {
+    grid-area: header;
+    background-color: #ffc178;
+    position: relative;
+    padding: 0 15px;
+}
+.header img {
+    width: 80px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}

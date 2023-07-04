@@ -1,0 +1,8 @@
+.container {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+.users {
+    margin-bottom: 50px;
+}
+.messages {}
