@@ -1,7 +1,6 @@
-const ADD_POST = 'ADD-POST';
-const ON_CHANGE_POST = 'ON-CHANGE-POST';
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const ON_CHANGE_MESSAGE = 'ON-CHANGE-MESSAGE';
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
+import asideReducer from "./asideReducer";
 
 let store = {
     _state : {
@@ -25,7 +24,8 @@ let store = {
                 {id: 3, message: 'Very well'}
             ],
             newMessageText: ''
-        }
+        },
+        aside: {}
     },
     _callSubscriber() {
         console.log('State changed!');
@@ -37,32 +37,14 @@ let store = {
         this._callSubscriber = observer;
     },
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            let newPost = {id: 4, message: this._state.profilePage.newPostText};
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === SEND_MESSAGE) {
-            let newMessage = {id: 4, message: this._state.dialogsPage.newMessageText};
-            this._state.dialogsPage.messages.push(newMessage);
-            this._state.dialogsPage.newMessageText = '';
-            this._callSubscriber(this._state);
-        } else if (action.type === ON_CHANGE_POST) {
-            this._state.profilePage.newPostText = action.newPost;
-            this._callSubscriber(this._state);
-        } else if (action.type === ON_CHANGE_MESSAGE) {
-            this._state.dialogsPage.newMessageText = action.newMessage;
-            this._callSubscriber(this._state);
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.aside = asideReducer(this._state.aside, action);
+
+        this._callSubscriber(this._state);
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST});
-
-export const onChangePostActionCreator = (text) => ({type: ON_CHANGE_POST, newPost:text});
-
-export const sendMessageActionCreator = () => ({type: SEND_MESSAGE});
-
-export const onChangeMessageActionCreator = (text) => ({type: ON_CHANGE_MESSAGE, newMessage: text});
-
 export default store;
+
+window.store = store;
