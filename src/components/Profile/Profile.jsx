@@ -1,7 +1,7 @@
 import classes from './Profile.module.css';
-import Posts from "./Posts/Posts";
 import Info from "./Info/Info";
 import Banner from "./Banner/Banner";
+import PostsContainer from "./Posts/PostsContainer";
 
 function Profile(props) {
 
@@ -9,7 +9,7 @@ function Profile(props) {
         <div className={classes.container}>
             <Banner />
             <Info />
-            <Posts posts={props.profilePage.posts} newPostText={props.profilePage.newPostText} dispatch={props.dispatch}/>
+            <PostsContainer store={props.store} />
         </div>
     );
 }

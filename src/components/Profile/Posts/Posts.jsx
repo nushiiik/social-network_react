@@ -1,19 +1,18 @@
 import React from 'react';
 import classes from "./Posts.module.css";
 import Post from "./Post/Post";
-import {addPostActionCreator, onChangePostActionCreator} from "../../../redux/profileReducer";
 
 function Posts(props) {
 
     let postsElements = props.posts.map( post => <Post message={post.message} />);
 
     let addPost = () => {
-        props.dispatch(addPostActionCreator());
+        props.addPost();
     }
 
     let onChangePost = (event) => {
         let text = event.target.value;
-        props.dispatch(onChangePostActionCreator(text));
+        props.onChangePost(text);
     }
 
     return (
