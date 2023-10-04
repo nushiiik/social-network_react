@@ -5,9 +5,9 @@ import Message from "./Message/Message";
 
 function Dialogs(props) {
 
-    let usersElements = props.dialogsPage.users.map( user => <User name={user.name} id={user.id} />);
+    let usersElements = props.dialogsPage.users.map( user => <User name={user.name} key={user.id} id={user.id} />);
 
-    let messagesElements = props.dialogsPage.messages.map( message => <Message message={message.message}/>);
+    let messagesElements = props.dialogsPage.messages.map( message => <Message message={message.message} key={message.id}/>);
 
 
     let sendMessage = () => {
@@ -30,7 +30,8 @@ function Dialogs(props) {
                 </div>
                 <div>
                     <div>
-                        <textarea placeholder='Enter new message' value={props.newMessageText} onChange={onChangeMessage}/></div>
+                        <textarea placeholder='Enter new message' value={props.newMessageText} onChange={onChangeMessage}/>
+                    </div>
                     <div>
                         <button onClick={sendMessage}>Send</button>
                         <button>Delete</button>

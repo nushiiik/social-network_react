@@ -1,3 +1,4 @@
+import React from "react";
 import classes from './Info.module.css';
 
 function Info() {

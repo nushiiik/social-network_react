@@ -1,3 +1,4 @@
+import React from "react";
 import classes from './Nav.module.css';
 import {NavLink} from "react-router-dom";
 
@@ -16,6 +17,9 @@ function Nav() {
                 </li>
                 <li className={classes.item}>
                     <NavLink to="/music" className = { navData => navData.isActive ? classes.active : classes.item }>Music</NavLink>
+                </li>
+                <li className={classes.item}>
+                    <NavLink to="/users" className = { navData => navData.isActive ? classes.active : classes.item }>Users</NavLink>
                 </li>
                 <li className={classes.item}>
                     <NavLink to="/settings" className = { navData => navData.isActive ? classes.active : classes.item }>Settings</NavLink>

@@ -1,3 +1,4 @@
+import React from "react";
 import classes from './Profile.module.css';
 import Info from "./Info/Info";
 import Banner from "./Banner/Banner";
