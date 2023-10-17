@@ -1,14 +1,10 @@
-.container {
+.user {
     display: grid;
     grid-template-columns: 1fr 5fr;
-}
-.avatar{
-    width: 150px;
-    height: 100px;
-}
-.user {
     margin-bottom: 50px;
 }
-.info {
-
+.img {
+    width: 100px;
+    height: 100px;
 }
+
