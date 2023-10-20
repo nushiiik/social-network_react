@@ -1,23 +1,27 @@
 import React from "react";
 import classes from './Users.module.css';
-import axios from "axios";
 import userPhoto from "../../assets/images/user.png"
 
-class Users extends React.Component {
+function Users(props) {
 
-    constructor (props) {
-        super(props);
+    let pagesNumber = Math.ceil(props.countPages / props.pageSize);
+    let pages = [];
+    for (let i = 1; i <= pagesNumber; i++) {
+        pages.push(i);
+    }
 
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                this.props.setUsers(response.data.items);
-            });
-    };
-
-    render = () => {
-        return <div>
+    return (
+        <div>
+            <div>
+                {
+                    pages.map(p => {
+                        return <span className={props.currentPage === p && classes.selectedPage}
+                                     onClick={() => props.onPageChanged(p)}>{p}</span>
+                    })
+                }
+            </div>
             {
-                this.props.users.map(user => <div key={user.id} id={user.id} className={classes.user}>
+                props.users.map(user => <div key={user.id} id={user.id} className={classes.user}>
                     <div>
                         <div>
                             <img src={user.photos.small != null ? user.photos.small : userPhoto}
@@ -25,9 +29,9 @@ class Users extends React.Component {
                         </div>
                         <div>
                             {user.followed ? <button onClick={() => {
-                                this.props.unfollow(user.id)
+                                props.unfollow(user.id)
                             }}>Unfollow</button> : <button onClick={() => {
-                                this.props.follow(user.id)
+                                props.follow(user.id)
                             }}>Follow</button>}
                         </div>
                     </div>
@@ -40,7 +44,7 @@ class Users extends React.Component {
                 </div>)
             }
         </div>
-    };
+    );
 }
 
 export default Users;
